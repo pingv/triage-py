@@ -1,0 +1,50 @@
+{
+    "_README": [
+        "This file lists Confluence pages that the AI should reference during triage.",
+        "Add new pages as your team creates them - no code changes needed.",
+        "",
+        "HOW TO FIND A PAGE ID:",
+        "  1. Open the page in Confluence",
+        "  2. Click ... menu → Page Information",
+        "  3. The page ID is in the URL: /pages/viewpage.action?pageId=XXXXXXXX",
+        "",
+        "CATEGORIES:",
+        "  core_runbook    → Always loaded for every triage (L1/L2 troubleshooting guides)",
+        "  pay_policy      → Loaded when ticket involves pay/payroll/overtime topics",
+        "  scheduling      → Loaded when ticket involves schedules/shifts/rotations",
+        "  time_entry      → Loaded when ticket involves punches/time entries/clocking",
+        "  integration     → Loaded when ticket involves imports/exports/syncs/APIs",
+        "  general         → Loaded when no specific category matches"
+    ],
+
+    "pages": [
+        {
+            "page_id": "REPLACE_WITH_PAGE_ID",
+            "title": "Common Issues & Troubleshooting Guide",
+            "category": "core_runbook",
+            "description": "Master troubleshooting guide for L1/L2 support",
+            "notes": "This is the primary reference doc - always include"
+        },
+        {
+            "page_id": "REPLACE_WITH_PAGE_ID",
+            "title": "Pay Policy Configuration Runbook",
+            "category": "pay_policy",
+            "description": "How pay rules, OT thresholds, and FLSA settings work",
+            "notes": ""
+        },
+        {
+            "page_id": "REPLACE_WITH_PAGE_ID",
+            "title": "Schedule Management Known Issues",
+            "category": "scheduling",
+            "description": "Known issues with shift patterns, rotations, and schedule assignments",
+            "notes": ""
+        },
+        {
+            "page_id": "REPLACE_WITH_PAGE_ID",
+            "title": "Time Entry Processing Guide",
+            "category": "time_entry",
+            "description": "How punches are processed, validated, and rounded",
+            "notes": ""
+        }
+    ]
+}

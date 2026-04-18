@@ -1,0 +1,132 @@
+{
+    "_README": [
+        "This file captures domain knowledge that helps the AI understand ADP Time & Attendance.",
+        "Edit this as your team learns new patterns. No code changes needed.",
+        "",
+        "SECTIONS:",
+        "  keyword_synonyms    → Maps different terms that mean the same thing",
+        "  project_routing     → Rules for which project handles what (helps AI validate routing)",
+        "  category_keywords   → Maps issue categories to their Confluence doc categories",
+        "  false_patterns      → Issues that LOOK similar but have different root causes",
+        "  environment_notes   → Env-specific quirks the AI should know about"
+    ],
+
+    "keyword_synonyms": {
+        "_description": "L1/L2 and clients use inconsistent terminology. This helps the AI match across variations.",
+        "mappings": {
+            "OT": ["overtime", "over time", "OT hours", "overtime hours"],
+            "PTO": ["paid time off", "time off", "vacation", "personal day"],
+            "FLSA": ["fair labor standards", "federal overtime", "FLSA compliance"],
+            "punch": ["time entry", "clock in", "clock out", "swipe", "badge"],
+            "accrual": ["accrual balance", "PTO balance", "leave balance", "bank"],
+            "schedule": ["shift", "roster", "rotation", "work schedule"],
+            "pay rule": ["pay policy", "pay code", "earning code", "pay configuration"],
+            "rounding": ["punch rounding", "time rounding", "round rule"],
+            "attestation": ["meal attestation", "break attestation", "meal waiver"],
+            "geofence": ["geofencing", "location tracking", "GPS punch", "mobile punch"],
+            "differential": ["shift differential", "premium pay", "shift premium"],
+            "retro": ["retroactive", "retro pay", "back pay", "retroactive calculation"],
+            "lockout": ["pay period lockout", "timecard lock", "period lock"]
+        }
+    },
+
+    "project_routing": {
+        "_description": "Which project handles which types of issues. Helps AI validate if ticket is routed correctly.",
+        "TIMEFEAT": {
+            "description": "Time & Attendance features and general functionality",
+            "typical_issues": [
+                "General time tracking issues",
+                "Dashboard and UI problems",
+                "Cross-module integration issues",
+                "Feature requests and enhancements"
+            ]
+        },
+        "TIMPOLPAY": {
+            "description": "Pay policies and payroll calculations",
+            "typical_issues": [
+                "Overtime calculation errors",
+                "Pay rule configuration problems",
+                "FLSA compliance issues",
+                "Shift differential calculations",
+                "Retroactive pay calculations",
+                "Pay code mapping issues"
+            ]
+        },
+        "TIMSCHED": {
+            "description": "Scheduling and shift management",
+            "typical_issues": [
+                "Schedule template issues",
+                "Shift rotation problems",
+                "Schedule assignment errors",
+                "Open shift management",
+                "Schedule-to-pay integration"
+            ]
+        },
+        "TIMEMON": {
+            "description": "Time monitoring and compliance",
+            "typical_issues": [
+                "Compliance reporting errors",
+                "Monitoring alert issues",
+                "Audit trail problems",
+                "Regulatory compliance gaps"
+            ]
+        }
+    },
+
+    "category_keywords": {
+        "_description": "Maps issue keywords to Confluence doc categories (from confluence_docs.json).",
+        "pay_policy": [
+            "overtime", "OT", "pay", "payroll", "calculation", "FLSA",
+            "differential", "premium", "retro", "retroactive", "earning",
+            "pay rule", "pay code", "pay policy", "wage", "salary", "rate"
+        ],
+        "scheduling": [
+            "schedule", "shift", "rotation", "roster", "assignment",
+            "open shift", "swap", "bid", "template", "pattern",
+            "coverage", "staffing"
+        ],
+        "time_entry": [
+            "punch", "clock", "time entry", "swipe", "badge",
+            "rounding", "attestation", "meal", "break", "geofence",
+            "mobile", "kiosk", "terminal", "timeclock"
+        ],
+        "integration": [
+            "import", "export", "sync", "integration", "API", "feed",
+            "batch", "file", "transfer", "mapping", "connector"
+        ]
+    },
+
+    "false_patterns": {
+        "_description": "Issues that LOOK similar on the surface but have different root causes. Prevents AI from making wrong matches.",
+        "examples": [
+            {
+                "symptom": "Overtime hours showing as zero",
+                "looks_like": "Pay rule not configured for OT",
+                "but_actually_could_be": [
+                    "Employee exemption status set incorrectly",
+                    "Pay period boundary causing split-week calculation",
+                    "Schedule not linked to pay policy",
+                    "Effective dating mismatch on policy assignment"
+                ]
+            },
+            {
+                "symptom": "Schedule not appearing for employee",
+                "looks_like": "Schedule not assigned",
+                "but_actually_could_be": [
+                    "Employee org unit changed and lost schedule inheritance",
+                    "Effective dating gap in schedule assignment",
+                    "Schedule template expired",
+                    "Caching issue - schedule exists but UI not refreshing"
+                ]
+            }
+        ]
+    },
+
+    "environment_notes": {
+        "_description": "Environment-specific quirks that affect troubleshooting.",
+        "notes": [
+            "Production data refresh to staging happens weekly on Sundays",
+            "UPDATE: Add your own environment-specific notes here"
+        ]
+    }
+}
